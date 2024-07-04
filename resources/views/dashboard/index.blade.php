@@ -29,7 +29,7 @@
                                         <i class="bi bi-menu-button-wide"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>7</h6>
+                                        <h6>{{ \App\Models\Equipement::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +48,7 @@
                                         <i class="bi bi-journal-text"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>1</h6>
+                                        <h6>{{ \App\Models\Emprunt::whereNull('fin')->count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -67,7 +67,7 @@
                                         <i class="bi bi-journal-text"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>0</h6>
+                                        <h6>{{ \App\Models\Reservation::where('status', 'accepted')->count() }}</h6>
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                         <i class="bi bi-person"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>15</h6>
+                                        <h6>{{ \App\Models\User::count() }}</h6>
                                     </div>
                                 </div>
                             </div>
