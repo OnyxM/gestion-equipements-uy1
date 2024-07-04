@@ -21,8 +21,8 @@ return new class extends Migration
             $table->time('fin')->nullable();
             $table->text('commentaire')->nullable();
             /**
-             * pending => créé
-             * rejected => rejeté par le manager
+             * pending => réservation créée
+             * rejected => rejetée par le manager...
              * accepted => ... !
              */
             $table->enum('status', ['pending', 'rejected', 'accepted'])->default('pending');
