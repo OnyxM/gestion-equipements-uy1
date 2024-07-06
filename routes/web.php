@@ -57,6 +57,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
 
     Route::group(['prefix' => "users"], function(){
         Route::get('', [UserController::class, 'index'])->name('users');
+        Route::get('/ajouter', [UserController::class, 'add'])->name('users.add');
         Route::post('/store', [UserController::class,'store'])->name('users.store');
         Route::get('/edit/{id}', [UserController::class,'edit'])->name('users.edit');
         Route::put('/update/{id}', [UserController::class,'update'])->name('users.update');
