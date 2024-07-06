@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Emprunt;
 use App\Models\Equipement;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
@@ -82,10 +83,12 @@ class EquipementController extends Controller
         $equipement = Equipement::findOrFail($id);
 
         $reservations = Reservation::where('equipement_id', $id)->count();
+        $emprunts = Emprunt::where('equipement_id', $id)->count();
 
-        if($reservations != 0){
-            abort(500);
+        if($reservations != 0 || $emprunts != 0){
+            abort(500, "Impossible de supprimer cet équipement car il a déjà été utilisé pour une réservation ou un emprunt!");
         }
+
         $equipement->delete();
 
         return redirect()->route('equipements');
