@@ -104,7 +104,8 @@
         <li class="nav-item mb-4">
             <a class="nav-link " href="{{ route('emprunts') }}">
                 <i class="bi bi-journal-text"></i>
-                <span>Emprunts</span>
+                @php $nbre_emprunts_en_attente = \App\Models\Emprunt::where('status', 'attente_de_validation')->count(); @endphp
+                <span>Emprunts @if($nbre_emprunts_en_attente != 0 && auth()->user()->role != "delegue") <sup class="text-danger">{{$nbre_emprunts_en_attente}}</sup>@endif</span>
             </a>
         </li>
         <li class="nav-item mb-4">

@@ -48,7 +48,7 @@
                                         <i class="bi bi-journal-text"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>{{ \App\Models\Emprunt::whereNull('fin')->count() }}</h6>
+                                        <h6>{{ \App\Models\Emprunt::where('status', 'terminé')->count() }}</h6>
                                     </div>
                                 </div>
                             </div>

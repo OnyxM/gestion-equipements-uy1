@@ -24,9 +24,11 @@
                             <div class="card-body">
                                 <div class="row">
                                     <h5 class="col-6 card-title">Emprunts enregistrés</h5>
-                                    <span class="col-6 p-1" style="text-align:right;">
-                                        <a href="{{ route('emprunts.add') }}" class="btn btn-primary">ajouter</a>
+                                    @if(auth()->user()->role == "delegue")
+                                    <span class="col-6 p-2" style="text-align:right;">
+                                        <a href="{{ route('emprunts.add') }}" class="btn btn-primary m-2">ajouter</a>
                                     </span>
+                                    @endif
                                 </div>
 
                                 <table class="table table-borderless datatable">
@@ -64,7 +66,7 @@
                                                 @endif
                                             <td>{{ $emprunt->commentaire }}</td>
 
-                                            @if(auth()->user()->id != "delegue" && !in_array($emprunt->status, ['terminé', 'rejeté']))
+                                            @if(auth()->user()->role != "delegue" && !in_array($emprunt->status, ['terminé', 'rejeté']))
                                             <td>
                                                 <a href="{{ route('emprunts.edit', ['id' => $emprunt->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
                                             </td>

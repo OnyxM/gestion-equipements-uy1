@@ -12,11 +12,11 @@ class EmpruntController extends Controller
 {
     public function index()
     {
-        $emprunts = Emprunt::orderBy('date', 'desc')->get();
+        $emprunts = Emprunt::orderBy('id', 'desc')->get();
 
         // Si l'utilisateur connecté est un délégué, on ne récupère que les emprunts du délégué connecté
         if(auth()->user()->role == "delegue"){
-            $emprunts = Emprunt::where('delegue_id', auth()->user()->id)->orderBy('date', 'desc')->get();
+            $emprunts = Emprunt::where('delegue_id', auth()->user()->id)->orderBy('id', 'desc')->get();
         }
 
         $data =[
