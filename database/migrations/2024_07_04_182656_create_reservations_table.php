@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('manager_id')->unsigned(); // user avec role manager
             $table->integer('equipement_id')->unsigned();
             $table->date('date');
-            $table->time('debut');
-            $table->time('fin')->nullable();
+            $table->integer('debut');
+            $table->integer('fin')->nullable();
             $table->text('commentaire')->nullable();
             /**
              * pending => réservation créée

@@ -22,7 +22,12 @@
                         <div class="card recent-sales overflow-auto">
 
                             <div class="card-body">
-                                <h5 class="card-title">Equipements enregistrés</h5>
+                                <div class="row">
+                                    <h5 class="col-6 card-title">Equipements enregistrés</h5>
+                                    <span class="col-6 p-1" style="text-align:right;">
+                                        <a href="{{ route('equipements.add') }}" class="btn btn-primary">ajouter</a>
+                                    </span>
+                                </div>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
@@ -48,8 +53,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="javascript:void(0);" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
-                                                <a href="javascript:void(0);" class="btn btn-xs text-danger"><i class="bi bi-trash"></i></a>
+                                                <a href="{{ route('equipements.edit', ['id' => $equipement->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
+                                                <a href="{{ route('equipements.delete', ['id' => $equipement->id]) }}" class="btn btn-xs text-danger"><i class="bi bi-trash"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

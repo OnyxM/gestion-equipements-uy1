@@ -32,10 +32,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
 
     Route::group(['prefix' => "equipements"], function(){
         Route::get('', [EquipementController::class, 'index'])->name('equipements');
+        Route::get('/ajouter', [EquipementController::class, 'add'])->name('equipements.add');
         Route::post('/store', [EquipementController::class,'store'])->name('equipements.store');
         Route::get('/edit/{id}', [EquipementController::class,'edit'])->name('equipements.edit');
-        Route::put('/update/{id}', [EquipementController::class,'update'])->name('equipements.update');
-        Route::delete('/delete/{id}', [EquipementController::class,'delete'])->name('equipements.delete');
+        Route::post('/update/{id}', [EquipementController::class,'update'])->name('equipements.update');
+        Route::get('/delete/{id}', [EquipementController::class,'delete'])->name('equipements.delete');
     });
 
     Route::group(['prefix' => "emprunts"], function(){
@@ -43,7 +44,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
         Route::post('/store', [EmpruntController::class,'store'])->name('emprunts.store');
         Route::get('/edit/{id}', [EmpruntController::class,'edit'])->name('emprunts.edit');
         Route::put('/update/{id}', [EmpruntController::class,'update'])->name('emprunts.update');
-        Route::delete('/delete/{id}', [EmpruntController::class,'delete'])->name('emprunts.delete');
+        Route::get('/delete/{id}', [EmpruntController::class,'delete'])->name('emprunts.delete');
     });
 
     Route::group(['prefix' => "reservations"], function(){
@@ -51,7 +52,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
         Route::post('/store', [ReservationController::class,'store'])->name('reservations.store');
         Route::get('/edit/{id}', [ReservationController::class,'edit'])->name('reservations.edit');
         Route::put('/update/{id}', [ReservationController::class,'update'])->name('reservations.update');
-        Route::delete('/delete/{id}', [ReservationController::class,'delete'])->name('reservations.delete');
+        Route::get('/delete/{id}', [ReservationController::class,'delete'])->name('reservations.delete');
     });
 
     Route::group(['prefix' => "users"], function(){
@@ -59,7 +60,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
         Route::post('/store', [UserController::class,'store'])->name('users.store');
         Route::get('/edit/{id}', [UserController::class,'edit'])->name('users.edit');
         Route::put('/update/{id}', [UserController::class,'update'])->name('users.update');
-        Route::delete('/delete/{id}', [UserController::class,'delete'])->name('users.delete');
+        Route::get('/delete/{id}', [UserController::class,'delete'])->name('users.delete');
     });
 });
 
