@@ -100,12 +100,7 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item mb-4">
-            <a class="nav-link" href="{{ route('equipements') }}">
-                <i class="bi bi-menu-button-wide"></i>
-                <span>Equipements</span>
-            </a>
-        </li>
+        <hr>
         <li class="nav-item mb-4">
             <a class="nav-link " href="{{ route('emprunts') }}">
                 <i class="bi bi-journal-text"></i>
@@ -118,12 +113,22 @@
                 <span>Réservations</span>
             </a>
         </li>
+        @if(auth()->user()->role == "admin")
+        <hr>
+
+        <li class="nav-item mb-4">
+            <a class="nav-link" href="{{ route('equipements') }}">
+                <i class="bi bi-menu-button-wide"></i>
+                <span>Equipements</span>
+            </a>
+        </li>
         <li class="nav-item mb-4">
             <a class="nav-link " href="{{ route('users') }}">
                 <i class="bi bi-person"></i>
                 <span>Users</span>
             </a>
         </li>
+        @endif
     </ul>
 
 </aside><!-- End Sidebar-->

@@ -21,28 +21,40 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Enregistrer un nouvel équipement</h5>
+                                <h5 class="card-title">Enregistrer un nouvel utilisateur</h5>
 
                                 <!-- Floating Labels Form -->
-                                <form class="row g-3" method="POST" action="{{route('equipements.store')}}">
+                                <form class="row g-3" method="POST" action="{{route('users.store')}}">
                                     @csrf
 
                                     <div class="col-md-3">
                                         <div class="form-floating">
-                                            <input type="text" name="code" value="{{ old('code') }}" class="form-control @error('code') is-invalid @enderror" id="floatingName" placeholder="Video Projecteur HP Noir">
-                                            <label for="floatingName">Code equipement</label>
+                                            <select name="role" id="foatingRole" class="form-control" aria-label="Role" required>
+                                                <option value="">Choissisez un role</option>
+                                                <option value="manager">Manager</option>
+                                                <option value="delegue">Délégué</option>
+                                            </select>
+                                            <label for="foatingRole">Role</label>
                                         </div>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="floatingName" placeholder="Video Projecteur HP Noir" required>
-                                            <label for="floatingName">Nom equipement <sup class="text-danger">*</sup></label>
+                                            <input type="text" name="name" value="{{old('name')}}" class="form-control @error('name') is-invalid @enderror" id="floatingName" placeholder="Johnson Otwel" required>
+                                            <label for="floatingName">Name <sup class="text-danger">*</sup></label>
                                         </div>
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-md-6">
                                         <div class="form-floating">
-                                            <textarea class="form-control" name="description" placeholder="Address" id="floatingTextarea" style="height: 100px;"></textarea>
-                                            <label for="floatingTextarea">Description</label>
+                                            <input type="text" name="email" value="{{old('email')}}" class="form-control @error('email') is-invalid @enderror" id="floatingName" placeholder="email@domain.com" required>
+                                            <label for="floatingName">Email <sup class="text-danger">*</sup></label>
+                                            <div class="text-danger h6">Vous devrez communiquer cette information au nouvel utilisateur</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" name="password" value="{{old('password')}}" class="form-control @error('password') is-invalid @enderror" id="floatingName" placeholder="email@domain.com" required>
+                                            <label for="floatingName">Mot de passe <sup class="text-danger">*</sup></label>
+                                            <div class="text-danger h6">Vous devrez communiquer cette information au nouvel utilisateur</div>
                                         </div>
                                     </div>
 

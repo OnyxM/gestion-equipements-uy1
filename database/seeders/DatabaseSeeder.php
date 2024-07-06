@@ -19,9 +19,6 @@ class DatabaseSeeder extends Seeder
              'role' => "admin"
          ]);
 
-         \App\Models\User::factory(25)->create();
-
-
-         Equipement::factory(5)->create();
+         $this->call(EquipementSeeder::class);
     }
 }

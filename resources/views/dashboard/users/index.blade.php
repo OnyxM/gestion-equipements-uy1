@@ -32,7 +32,6 @@
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
-                                        <th scope="col">#</th>
                                         <th scope="col">name</th>
                                         <th scope="col">email</th>
                                         <th scope="col">Role</th>
@@ -42,13 +41,14 @@
                                     <tbody>
                                     @foreach($users as $user)
                                         <tr>
-                                            <th scope="row">#{{ $user->code }}</th>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td>{{ $user->role }}</td>
                                             <td>
 {{--                                                <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>--}}
+                                                @if($user->id != auth()->user()->id)
                                                 <a href="{{ route('users.delete', ['id' => $user->id]) }}" class="btn btn-xs text-danger"><i class="bi bi-trash"></i></a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

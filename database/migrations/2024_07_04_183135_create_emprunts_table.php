@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('emprunts', function (Blueprint $table) {
             $table->id();
             $table->integer('delegue_id')->unsigned(); // user avec role delegue
-            $table->integer('manager_id')->unsigned(); // user avec role manager
+            $table->integer('manager_id')->unsigned()->nullable(); // user avec role manager
             $table->integer('equipement_id')->unsigned();
             $table->date('date');
-            $table->integer('debut');
-            $table->integer('fin')->nullable();
+            $table->integer('heure_debut');
+            $table->integer('heure_fin')->nullable();
+            /**
+             * pending => réservation créée
+             * rejected => rejetée par le manager...
+             * accepted => ... !
+             */
+            $table->enum('status', ['attente_de_validation', 'en_cours', 'terminé', 'rejeté'])->default('attente_de_validation');
             $table->text('commentaire')->nullable();
 //            $table->foreign('delegue_id')->references('id')->on('users')->onDelete('cascade');
 //            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
