@@ -6,9 +6,17 @@ ProjecTech est un projet permettant de gérer l'emprunt et réservation du maté
     - composer2
 
 ## Pour lancer le projet
+    - git clone https://github.com/OnyxM/gestion-equipements-uy1.git
+
+    - cd gestion-equipements-uy1
+
     - composer install
 
     - créer la BD ('gestion_equipement' par défaut)
+
+    - copy .env.example .env
+
+    - php artisan key:generate 
 
     - php artisan migrate:fresh --seed
 
