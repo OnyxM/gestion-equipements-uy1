@@ -19,11 +19,12 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@example.com',
                 'role' => "admin"
-            ],[
-                'name' => 'Délégué M1 SIGL',
-                'email' => 'delegue1@example.com',
-                'role' => "delegue"
             ]
+//            ,[
+//                'name' => 'Délégué M1 SIGL',
+//                'email' => 'delegue1@example.com',
+//                'role' => "delegue"
+//            ]
         ];
 
         foreach ($users as $user) {
