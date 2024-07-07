@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->integer('delegue_id')->unsigned(); // user avec role delegue
-            $table->integer('manager_id')->unsigned(); // user avec role manager
+            $table->integer('manager_id')->unsigned()->nullable(); // user avec role manager
             $table->integer('equipement_id')->unsigned();
             $table->date('date');
             $table->integer('debut');

@@ -18,4 +18,19 @@ class Reservation extends Model
         'fin',
         'commentaire',
     ];
+
+    public function delegue()
+    {
+        return $this->belongsTo(User::class, 'delegue_id');
+    }
+
+    public function manager()
+    {
+        return $this->belongsTo(User::class, 'manager_id');
+    }
+
+    public function equipement()
+    {
+        return $this->belongsTo(Equipement::class, 'equipement_id');
+    }
 }

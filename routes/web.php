@@ -50,7 +50,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => "auth"], function(){
 
     Route::group(['prefix' => "reservations"], function(){
         Route::get('', [ReservationController::class, 'index'])->name('reservations');
-        Route::get('/add', [ReservationController::class, 'index'])->name('reservations.add');
+        Route::get('/add', [ReservationController::class, 'add'])->name('reservations.add');
         Route::post('/store', [ReservationController::class,'store'])->name('reservations.store');
         Route::get('/edit/{id}', [ReservationController::class,'edit'])->name('reservations.edit');
         Route::post('/update/{id}', [ReservationController::class,'update'])->name('reservations.update');

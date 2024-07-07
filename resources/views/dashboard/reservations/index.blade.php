@@ -2,11 +2,11 @@
 
 @section("content")
     <div class="pagetitle">
-        <h1>Emprunts</h1>
+        <h1>Reservations</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">Emprunts</li>
+                <li class="breadcrumb-item active">Reservations</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -23,10 +23,10 @@
 
                             <div class="card-body">
                                 <div class="row">
-                                    <h5 class="col-6 card-title">Emprunts enregistrés</h5>
+                                    <h5 class="col-6 card-title">Reservations enregistrés</h5>
                                     @if(auth()->user()->role == "delegue")
                                     <span class="col-6 p-2" style="text-align:right;">
-                                        <a href="{{ route('emprunts.add') }}" class="btn btn-primary m-2">ajouter</a>
+                                        <a href="{{ route('reservations.add') }}" class="btn btn-primary m-2">ajouter</a>
                                     </span>
                                     @endif
                                 </div>
@@ -48,29 +48,29 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($emprunts as $emprunt)
+                                    @foreach($reservations as $reservation)
                                         <tr>
-                                            <th scope="row">{{ $emprunt->date }}</th>
-                                            <td>{{ $emprunt->equipement->code }}</td>
-                                            <td>{{ $emprunt->delegue->name }}</td>
-                                            <td>{{ @$emprunt->manager->name }}</td>
-                                            <td>{{ @$emprunt->date }}</td>
-                                            <td>{{ $emprunt->heure_debut . "h - " . $emprunt->heure_fin . "h" }}</td>
+                                            <th scope="row">{{ $reservation->date }}</th>
+                                            <td>{{ @$reservation->equipement->code }}</td>
+                                            <td>{{ @$reservation->delegue->name }}</td>
+                                            <td>{{ @$reservation->manager->name }}</td>
+                                            <td>{{ @$reservation->date }}</td>
+                                            <td>{{ $reservation->debut . "h - " . $reservation->fin . "h" }}</td>
                                             <td>
-                                                @if($emprunt->status=="terminé")
+                                                @if($reservation->status=="terminé")
                                                     <span class="badge bg-success">Terminé</span>
-                                                @elseif($emprunt->status == "rejeté")
+                                                @elseif($reservation->status == "rejeté")
                                                     <span class="badge bg-danger">Rejeté</span>
-                                                @elseif($emprunt->status == "en_cours")
+                                                @elseif($reservation->status == "en_cours")
                                                     <span class="badge bg-warning">En utilisation</span>
                                                 @else
                                                     <span class="badge bg-info">Attente de validation</span>
                                                 @endif
-                                            <td>{{ $emprunt->commentaire }}</td>
+                                            <td>{{ $reservation->commentaire }}</td>
 
-                                            @if(auth()->user()->role != "delegue" && !in_array($emprunt->status, ['terminé', 'rejeté']))
+                                            @if(auth()->user()->role != "delegue" && !in_array($reservation->status, ['rejected', 'accepted']))
                                             <td>
-                                                <a href="{{ route('emprunts.edit', ['id' => $emprunt->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
+                                                <a href="{{ route('reservations.edit', ['id' => $reservation->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
                                             </td>
                                             @endif
                                         </tr>
