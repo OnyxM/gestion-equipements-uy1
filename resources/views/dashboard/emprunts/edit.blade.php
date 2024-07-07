@@ -32,8 +32,10 @@
                                         <div class="form-floating">
                                             <select name="status" id="floatingStatus" class="form-control @error('status') is-invalid @enderror" required>
                                                 <option value="">Validez/Rejetez l'emprunt</option>
+                                                @if($emprunt->status == "attente_de_validation")
                                                 <option value="en_cours">Validé</option>
                                                 <option value="rejeté">Rejeté</option>
+                                                @endif
                                                 <option value="terminé">Utilisation terminée</option>
                                             </select>
                                             <label for="floatingStatus">Choisissez une action <sup class="text-danger">*</sup></label>

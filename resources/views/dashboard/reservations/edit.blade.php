@@ -2,11 +2,11 @@
 
 @section("content")
     <div class="pagetitle">
-        <h1>Emprunts</h1>
+        <h1>Reservations</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                <li class="breadcrumb-item active">Emprunts</li>
+                <li class="breadcrumb-item active">Reservations</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -21,62 +21,70 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Modifier sur l'équipement {{ $emprunt->equipement->code }}</h5>
+                                <h5 class="card-title">Modifier la réservation {{ $reservation->equipement->code }}</h5>
 
                                 <!-- Floating Labels Form -->
-                                <form class="row g-3" method="POST" action="{{route('emprunts.update', ['id' => $emprunt->id])}}">
+                                <form class="row g-3" method="POST" action="{{route('reservations.update', ['id' => $reservation->id])}}">
                                     @csrf
-                                    <input type="hidden" name="emprunt" value="{{ $emprunt->id }}" required>
-
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <select name="status" id="floatingStatus" class="form-control @error('status') is-invalid @enderror" required>
-                                                <option value="">Validez/Rejetez l'emprunt</option>
-                                                <option value="en_cours">Validé</option>
-                                                <option value="rejeté">Rejeté</option>
-                                                <option value="terminé">Utilisation terminée</option>
-                                            </select>
-                                            <label for="floatingStatus">Choisissez une action <sup class="text-danger">*</sup></label>
-                                        </div>
-                                    </div>
-
-                                    <hr>
+                                    <input type="hidden" required value="{{ $reservation->id }}" name="id">
 
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <select name="equipement" id="floatingEquipement" class="form-control @error('equipement') is-invalid @enderror">
+                                            <select disabled name="equipement" id="floatingEquipement" class="form-control @error('equipement') is-invalid @enderror" required>
                                                 <option value="">Choissisez un équipement</option>
                                                 @foreach($equipements as $equipement)
-                                                    <option value="{{ $equipement->id }}" @selected($equipement->id == $emprunt->equipement_id)>{{ $equipement->name }}</option>
+                                                    <option value="{{ $equipement->id }}" @selected($equipement->id==$reservation->equipement_id)>{{ $equipement->name }}</option>
                                                 @endforeach
                                             </select>
-                                            <label for="floatingEquipement">Choisissez l'équipement à emprunter <sup class="text-danger">*</sup></label>
+                                            <label for="floatingEquipement">Choisissez l'équipement à réserver <sup class="text-danger">*</sup></label>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" disabled value="{{ $emprunt->delegue->name }}" class="form-control">
+                                            <input type="text" disabled value="{{ $reservation->delegue->name }}" class="form-control">
                                             <label for="floatingName">Nom du délégué</label>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-6">
+                                    <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="number" min="07" max="{{ date('H', time()) }}" name="heure_debut" value="{{ old('heure_debut') ?? $emprunt->heure_debut }}" class="form-control @error('heure_debut') is-invalid @enderror" id="floatingName" placeholder="Video Projecteur HP Noir">
-                                            <label for="floatingName">Heure début emprunt</label>
+                                            <input disabled type="date" min="07" max="18" name="date" value="{{ old('date') }}" class="form-control @error('date') is-invalid @enderror" id="floatingName" required>
+                                            <label for="floatingName">Date de la reservation</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="number" disabled name="heure_fin" value="{{ date('H', time()) }}" class="form-control" id="floatingName" placeholder="Video Projecteur HP Noir">
+                                            <input disabled type="number" min="07" max="18" name="heure_debut" value="{{ $reservation->debut }}" class="form-control @error('heure_debut') is-invalid @enderror" id="floatingName" required>
+                                            <label for="floatingName">Heure début reservation</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating">
+                                            <input disabled type="number" min="09" max="20" name="heure_fin" value="{{ $reservation->fin }}" class="form-control @error('heure_fin') is-invalid @enderror" id="floatingName" required>
                                             <label for="floatingName">Heure de retour du matériel</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <textarea class="form-control" name="description" placeholder="" id="floatingTextarea" style="height: 100px;">{{ old('description') ?? $emprunt->description }}</textarea>
-                                            <label for="floatingTextarea">Raison de l'emprunt</label>
+                                            <textarea disabled class="form-control @error('commentaire') is-invalid @enderror" name="commentaire" placeholder="" id="floatingTextarea" style="height: 100px;" required>{{ $reservation->commentaire }}</textarea>
+                                            <label for="floatingTextarea">Raison de la réservation</label>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <select name="status" id="floatingStatus" class="form-control @error('status') is-invalid @enderror" required>
+                                                <option value="">Validez/Rejetez la réservation</option>
+                                                @if($reservation->status == "pending")
+                                                <option value="accepted">Validé</option>
+                                                <option value="rejected">Rejeté</option>
+                                                @endif
+                                                <option value="ended">Débuter l'utilisation</option>
+                                            </select>
+                                            <label for="floatingStatus">Choisissez une action <sup class="text-danger">*</sup></label>
                                         </div>
                                     </div>
 

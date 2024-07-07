@@ -57,18 +57,18 @@
                                             <td>{{ @$reservation->date }}</td>
                                             <td>{{ $reservation->debut . "h - " . $reservation->fin . "h" }}</td>
                                             <td>
-                                                @if($reservation->status=="terminé")
+                                                @if($reservation->status=="ended")
                                                     <span class="badge bg-success">Terminé</span>
-                                                @elseif($reservation->status == "rejeté")
+                                                @elseif($reservation->status == "rejected")
                                                     <span class="badge bg-danger">Rejeté</span>
-                                                @elseif($reservation->status == "en_cours")
-                                                    <span class="badge bg-warning">En utilisation</span>
+                                                @elseif($reservation->status == "accepted")
+                                                    <span class="badge bg-warning">Accepté</span>
                                                 @else
                                                     <span class="badge bg-info">Attente de validation</span>
                                                 @endif
                                             <td>{{ $reservation->commentaire }}</td>
 
-                                            @if(auth()->user()->role != "delegue" && !in_array($reservation->status, ['rejected', 'accepted']))
+                                            @if(auth()->user()->role != "delegue" && !in_array($reservation->status, ['rejected', 'ended']))
                                             <td>
                                                 <a href="{{ route('reservations.edit', ['id' => $reservation->id]) }}" class="btn btn-xs text-warning"><i class="bi bi-pencil"></i></a>
                                             </td>

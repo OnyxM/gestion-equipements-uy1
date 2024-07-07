@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('heure_debut');
             $table->integer('heure_fin')->nullable();
+            $table->integer('reservation_id')->unsigned()->nullable();
             /**
              * pending => réservation créée
              * rejected => rejetée par le manager...

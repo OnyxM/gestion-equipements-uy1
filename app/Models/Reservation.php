@@ -17,6 +17,7 @@ class Reservation extends Model
         'debut',
         'fin',
         'commentaire',
+        'status',
     ];
 
     public function delegue()

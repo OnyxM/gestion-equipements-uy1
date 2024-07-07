@@ -24,8 +24,9 @@ return new class extends Migration
              * pending => réservation créée
              * rejected => rejetée par le manager...
              * accepted => ... !
+             * ended => le délégué est venur récupérer l'équipement
              */
-            $table->enum('status', ['pending', 'rejected', 'accepted'])->default('pending');
+            $table->enum('status', ['pending', 'rejected', 'accepted', 'ended'])->default('pending');
 //            $table->foreign('delegue_id')->references('id')->on('users')->onDelete('cascade');
 //            $table->foreign('manager_id')->references('id')->on('users')->onDelete('cascade');
 //            $table->foreign('equipement_id')->references('id')->on('equipements')->onDelete('cascade');
