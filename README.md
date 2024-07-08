@@ -12,7 +12,7 @@ ProjecTech est un projet permettant de gérer l'emprunt et réservation du maté
 
     - composer install
 
-    - créer la BD ('gestion_equipement' par défaut)
+    - créer la BD ('gestion_equipements' par défaut)
 
     - copy .env.example .env
 
